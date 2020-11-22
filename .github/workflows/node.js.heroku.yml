@@ -35,3 +35,13 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:login
       working-directory: myapp
+    - run: npm test
+      working-directory: myapp
+    - name: heroku deploy
+      uses: akhileshns/heroku-deploy@v3.6.8
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "assignment2-try"
+        heroku_email: "u2017347@giki.edu.pk"
+        appdir: "myapp"
+        buildpack: https://github.com/heroku/heroku-buildpack-nodejs#v170
